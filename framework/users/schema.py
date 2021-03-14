@@ -39,12 +39,12 @@ class HasUser(graphene.Mutation):
             ok = False
             return HasUser(ok=ok)
 
-
         
 
 class Query(ObjectType):
     teams = graphene.List(TeamType)
-    tasks = graphene.List(TaskType)
+    tasks = graphene.List(TaskType, username = graphene.String())
+    user = graphene.Field(UserType, username = graphene.String())
 
     def resolve_teams(self, info, **kwargs):
         return Team.objects.all()
@@ -53,11 +53,14 @@ class Query(ObjectType):
         username = kwargs.get('username')
 
         if username is not None:
-            return Task.objects.get(assigned=username)
-
+            return Task.objects.filter(assigned=username)
         return None
-    
 
+    def resolve_user(self, info, **kwargs):
+        username = kwargs.get('username')
+        if username is not None:
+            return User.objects.get(pk=username)
+    
 
 class Mutation(graphene.ObjectType):
     has_user = HasUser.Field()

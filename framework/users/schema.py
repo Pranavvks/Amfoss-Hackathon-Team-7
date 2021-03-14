@@ -21,14 +21,18 @@ class HasUser(graphene.Mutation):
         input = AuthInput(required=True)
 
     ok = graphene.Boolean()
-    user = graphene.Field(UserType)
 
     @staticmethod
     def mutate(root, info, input=None):
-    
-        user_instance = User.objects.get(pk=input.username)
-        ok = user_instance.password == input.password
-        return HasUser(ok=ok, user=user_instance)
+        try:
+            user_instance = User.objects.get(pk=input.username)
+            ok = user_instance.password == input.password
+            return HasUser(ok=ok)
+        except Exception:
+            ok = False
+            return HasUser(ok=ok)
+        
+        
 
 class Query(ObjectType):
     teams = graphene.List(TeamType)

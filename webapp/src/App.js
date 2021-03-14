@@ -1,12 +1,15 @@
-import React from 'react' ;
+import React,{useState} from 'react' ;
 import './App.css' ;
 import {BrowserRouter , Route , Switch} from 'react-router-dom';
 import Dashboard from './Dashboard' ;
 import Preferences from './preferences'
 import Login from './Login'
+import ProgressBar from './Progress'
 function App ()
 {
+  
   return (
+    
     <div className = "wrapper">
       <h1>Application</h1>
       <BrowserRouter>
@@ -20,6 +23,7 @@ function App ()
       </Switch>
       </BrowserRouter>
       <Login />
+      <ProgressBar value ={85} />
       </div>
   )
 }

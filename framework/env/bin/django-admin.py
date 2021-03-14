@@ -1,4 +1,4 @@
-#!/Users/jayakrishnanpa/dev/projects/hackathon/Amfoss-Hackathon-Team-7/framework/env/bin/python
+#!/home/nehal/Amfoss-Hackathon-Team-7/framework/env/bin/python3
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
